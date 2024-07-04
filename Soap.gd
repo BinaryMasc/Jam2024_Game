@@ -34,10 +34,10 @@ func _input(event):
 			if not sub_controller.is_subs_running() and sub_controller.get_subs_size() == 0:
 				cat.animation.show()
 				cat.animation.play()
-				sub_controller.new_subtitle("Que suerte, por lo menos cumplen con las reglas básicas de higiene en este lugar.")
-				sub_controller.new_subtitle("Te bañaste hoy ¿Verdad?")
-				sub_controller.new_subtitle("...")
-				sub_controller.new_subtitle("¡¿Verdad?!")
+				sub_controller.new_subtitle("Felix", "Que suerte, por lo menos cumplen con las reglas básicas de higiene en este lugar.")
+				sub_controller.new_subtitle("...", "Te bañaste hoy ¿Verdad?")
+				sub_controller.new_subtitle("", "...")
+				sub_controller.new_subtitle("...", "¡¿Verdad?!")
 				story_controller.story_flow_2()
 			return
 		

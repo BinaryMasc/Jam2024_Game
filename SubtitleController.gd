@@ -9,6 +9,7 @@ var button3: Button
 var button_pressed_callback: Callable
 
 var subs_node: Label
+var remitent_node: Label
 var subs_text: String
 var subs_running:= false
 var subs_waiting:= false
@@ -16,14 +17,15 @@ var subs_fast:= false
 var subs_running_queue = []
 
 var mouse_over:= false
-var debug_mode:= true
+var debug_mode:= false
 
 
 func _ready():
-	subs_node = get_node("/root/Node2D/SubtitleController/Subs")
-	button1 = get_node("/root/Node2D/SubtitleController/Button1")
-	button2 = get_node("/root/Node2D/SubtitleController/Button2")
-	button3 = get_node("/root/Node2D/SubtitleController/Button3")
+	subs_node = get_node("Subs")
+	remitent_node = get_node("Remitent")
+	button1 = get_node("Button1")
+	button2 = get_node("Button2")
+	button3 = get_node("Button3")
 	_hide_buttons()
 	
 	# Start jobs
@@ -54,7 +56,9 @@ func job_subtitles():
 	while true:
 		if subs_running_queue.size() > 0 and not subs_running and not subs_waiting:
 			subs_fast = false
+			call_deferred("internal_sub_set_sender", subs_running_queue[0].who)
 			internal_sub_delegate(subs_running_queue[0].msg)
+			#internal_sub_set_sender(subs_running_queue[0].who)
 			
 			if subs_running_queue[0].has_callback:
 				subs_running_queue[0].callback.call()
@@ -67,8 +71,8 @@ func job_subtitles():
 			continue
 		OS.delay_msec(100)
 
-func new_subtitle(msg):
-	subs_running_queue.append(Message.new(msg))
+func new_subtitle(who: String, msg: String):
+	subs_running_queue.append(Message.new(who, msg))
 
 func get_subs_size():
 	return subs_running_queue.size()
@@ -76,8 +80,8 @@ func get_subs_size():
 func is_subs_running():
 	return subs_running
 
-func new_subtitle_callback(msg: String, callback: Callable):
-	subs_running_queue.append(Message.new(msg).set_callback(callback))
+func new_subtitle_callback(who: String, msg: String, callback: Callable):
+	subs_running_queue.append(Message.new(who, msg).set_callback(callback))
 
 func internal_sub_delegate(msg):
 	subs_running = true
@@ -85,7 +89,11 @@ func internal_sub_delegate(msg):
 	var t = Thread.new()
 	t.start(callable)
 	t.wait_to_finish()
-	
+
+
+func internal_sub_set_sender(who: String):
+	print(who)
+	remitent_node.text = who
 
 func _internal_update_subs(text):
 	#subs_text = text

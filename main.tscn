@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Soap.gd" id="1_a7vq3"]
 [ext_resource type="Script" path="res://main.gd" id="1_km63b"]
 [ext_resource type="Script" path="res://SubtitleController.gd" id="2_jwbsu"]
-[ext_resource type="Texture2D" uid="uid://bfy5cmuom38yy" path="res://gratis-png-jabon.png" id="3_1slyy"]
+[ext_resource type="Texture2D" uid="uid://drfomrbjyxqet" path="res://gratis-png-jabon.png" id="3_1slyy"]
 [ext_resource type="Texture2D" uid="uid://1d54ltgoglti" path="res://Sprites/1.png" id="4_63bl1"]
 [ext_resource type="Script" path="res://Cat.gd" id="4_lwhbq"]
 [ext_resource type="Texture2D" uid="uid://k5yh0d0b6x6l" path="res://Sprites/2.png" id="5_lj22c"]
@@ -69,7 +69,7 @@ script = ExtResource("4_lwhbq")
 position = Vector2(562, 150)
 scale = Vector2(0.0939327, 0.0939327)
 sprite_frames = SubResource("SpriteFrames_nl4lk")
-frame_progress = 0.522676
+frame_progress = 0.686368
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cat"]
 position = Vector2(568.5, 147.375)
@@ -99,13 +99,22 @@ offset_right = 794.0
 offset_bottom = 434.0
 text = "Sí"
 
+[node name="Remitent" type="Label" parent="SubtitleController"]
+z_index = 9
+offset_left = 66.0
+offset_top = 483.0
+offset_right = 409.0
+offset_bottom = 522.0
+theme_override_colors/font_color = Color(0.898039, 0.921569, 0.478431, 1)
+theme_override_font_sizes/font_size = 25
+
 [node name="Subs" type="Label" parent="SubtitleController"]
 z_index = 9
 offset_left = 80.0
 offset_top = 525.0
 offset_right = 1127.0
 offset_bottom = 638.0
-theme_override_colors/font_color = Color(1, 0.769294, 0.396607, 1)
+theme_override_colors/font_color = Color(1, 0.949186, 0.875163, 1)
 theme_override_font_sizes/font_size = 25
 autowrap_mode = 2
 
