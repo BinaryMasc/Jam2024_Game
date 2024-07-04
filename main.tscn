@@ -1,0 +1,120 @@
+[gd_scene load_steps=16 format=3 uid="uid://dok0sf8yn78op"]
+
+[ext_resource type="Script" path="res://Soap.gd" id="1_a7vq3"]
+[ext_resource type="Script" path="res://main.gd" id="1_km63b"]
+[ext_resource type="Script" path="res://SubtitleController.gd" id="2_jwbsu"]
+[ext_resource type="Texture2D" uid="uid://bfy5cmuom38yy" path="res://gratis-png-jabon.png" id="3_1slyy"]
+[ext_resource type="Texture2D" uid="uid://1d54ltgoglti" path="res://Sprites/1.png" id="4_63bl1"]
+[ext_resource type="Script" path="res://Cat.gd" id="4_lwhbq"]
+[ext_resource type="Texture2D" uid="uid://k5yh0d0b6x6l" path="res://Sprites/2.png" id="5_lj22c"]
+[ext_resource type="Texture2D" uid="uid://hkvepifa8ay3" path="res://Sprites/3.png" id="6_rmh0e"]
+[ext_resource type="Texture2D" uid="uid://bo05lmae2lq1v" path="res://Sprites/4.png" id="7_pde6x"]
+[ext_resource type="Texture2D" uid="uid://cu224m8svl622" path="res://Sprites/5.png" id="8_gfvvl"]
+[ext_resource type="Texture2D" uid="uid://dm01w2h07780i" path="res://Sprites/6.png" id="9_ahhbr"]
+[ext_resource type="Texture2D" uid="uid://bh4m454ewvgi8" path="res://Sprites/Subs/squares-black-texture.jpg" id="12_gbd3f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aou4a"]
+size = Vector2(247, 198)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nl4lk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_63bl1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_lj22c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_rmh0e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_pde6x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_gfvvl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ahhbr")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lqonf"]
+size = Vector2(231, 239.25)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_km63b")
+
+[node name="Soap" type="Area2D" parent="."]
+position = Vector2(15, 11)
+script = ExtResource("1_a7vq3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Soap"]
+position = Vector2(264.5, 154)
+shape = SubResource("RectangleShape2D_aou4a")
+
+[node name="Sprite2D" type="Sprite2D" parent="Soap"]
+position = Vector2(264, 156)
+scale = Vector2(0.270142, 0.313981)
+texture = ExtResource("3_1slyy")
+
+[node name="Cat" type="Area2D" parent="."]
+position = Vector2(15, 11)
+script = ExtResource("4_lwhbq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Cat"]
+position = Vector2(562, 150)
+scale = Vector2(0.0939327, 0.0939327)
+sprite_frames = SubResource("SpriteFrames_nl4lk")
+frame_progress = 0.522676
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cat"]
+position = Vector2(568.5, 147.375)
+shape = SubResource("RectangleShape2D_lqonf")
+
+[node name="SubtitleController" type="Node" parent="."]
+script = ExtResource("2_jwbsu")
+
+[node name="Button1" type="Button" parent="SubtitleController"]
+offset_left = 374.0
+offset_top = 361.0
+offset_right = 494.0
+offset_bottom = 434.0
+text = "Sí"
+
+[node name="Button2" type="Button" parent="SubtitleController"]
+offset_left = 526.0
+offset_top = 361.0
+offset_right = 646.0
+offset_bottom = 434.0
+text = "Sí"
+
+[node name="Button3" type="Button" parent="SubtitleController"]
+offset_left = 674.0
+offset_top = 361.0
+offset_right = 794.0
+offset_bottom = 434.0
+text = "Sí"
+
+[node name="Subs" type="Label" parent="SubtitleController"]
+z_index = 9
+offset_left = 80.0
+offset_top = 525.0
+offset_right = 1127.0
+offset_bottom = 638.0
+theme_override_colors/font_color = Color(1, 0.769294, 0.396607, 1)
+theme_override_font_sizes/font_size = 25
+autowrap_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="SubtitleController"]
+z_index = -1
+position = Vector2(583.5, 560)
+scale = Vector2(0.631771, 0.174074)
+texture = ExtResource("12_gbd3f")
+
+[connection signal="pressed" from="SubtitleController/Button1" to="SubtitleController" method="_on_button1_pressed"]
+[connection signal="pressed" from="SubtitleController/Button2" to="SubtitleController" method="_on_button2_pressed"]
+[connection signal="pressed" from="SubtitleController/Button3" to="SubtitleController" method="_on_button3_pressed"]

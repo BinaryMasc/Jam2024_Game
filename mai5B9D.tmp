@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dok0sf8yn78op"]
+
+[ext_resource type="Texture2D" uid="uid://hp2acy3e1vma" path="res://WhatsApp Image 2024-06-17 at 09.57.48.jpeg" id="2_ybfv2"]
+[ext_resource type="Script" path="res://Sprite2D.gd" id="3_lfggm"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(885, 281)
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+position = Vector2(-596.108, -90.8355)
+rotation = -3.14159
+scale = Vector2(-1.08457, -1.77523)
+texture = ExtResource("2_ybfv2")
+script = ExtResource("3_lfggm")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 267.0
+offset_top = 544.0
+offset_right = 710.0
+offset_bottom = 615.0
