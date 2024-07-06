@@ -9,11 +9,13 @@ var button3: Button
 var button_pressed_callback: Callable
 
 var subs_node: Label
+var countdown_node: Label
 var remitent_node: Label
 var subs_text: String
 var subs_running:= false
 var subs_waiting:= false
 var subs_fast:= false
+var buttons_enabled := false
 var subs_running_queue = []
 
 var mouse_over:= false
@@ -26,6 +28,7 @@ func _ready():
 	button1 = get_node("Button1")
 	button2 = get_node("Button2")
 	button3 = get_node("Button3")
+	countdown_node = get_node("CountDown")
 	_hide_buttons()
 	
 	# Start jobs
@@ -64,7 +67,6 @@ func job_subtitles():
 				subs_running_queue[0].callback.call()
 			
 			subs_running_queue.remove_at(0)
-			print(subs_running_queue.size())
 			subs_running = false
 			subs_waiting = true
 			#print(subs_running_queue)
@@ -83,6 +85,30 @@ func is_subs_running():
 func new_subtitle_callback(who: String, msg: String, callback: Callable):
 	subs_running_queue.append(Message.new(who, msg).set_callback(callback))
 
+func new_question(label_button1: String, label_button2: String, label_button3: String, callback: Callable, response_time:= -1):
+	print(response_time)
+	if response_time > 0:
+		#var callable = Callable(self, "_question_loop_handler").bind(response_time)
+		Thread.new().start(Callable(self, "_question_loop_handler").bind(response_time))
+		#_question_loop_handler(response_time)
+	
+	button_pressed_callback = callback
+	_enable_and_show_buttons(0, label_button1, label_button2, label_button3)
+
+func _question_loop_handler(response_time: int):
+	var time = response_time
+	buttons_enabled = true
+	
+	while time > 0 and buttons_enabled:
+		call_deferred("_countdown_node_updater", str(time))
+		OS.delay_msec(1000)
+		time -= 1
+	if time == 0:
+		_on_buttons_pressed(-1)
+
+func _countdown_node_updater(time: String):
+	countdown_node.text = time
+
 func internal_sub_delegate(msg):
 	subs_running = true
 	var callable = Callable(self, "new_subtitle_sync").bind(msg)
@@ -92,7 +118,6 @@ func internal_sub_delegate(msg):
 
 
 func internal_sub_set_sender(who: String):
-	print(who)
 	remitent_node.text = who
 
 func _internal_update_subs(text):
@@ -136,7 +161,8 @@ func _show_buttons():
 	button2.show()
 	button3.show()
 	
-func _enable_and_show_buttons(delay_ms: int, msg1: String, msg2: String,msg3: String):
+func _enable_and_show_buttons(delay_ms: int, msg1: String, msg2: String, msg3: String):
+	buttons_enabled = true
 	button1.text = msg1
 	button2.text = msg2
 	button3.text = msg3
@@ -147,7 +173,6 @@ func _enable_and_show_buttons(delay_ms: int, msg1: String, msg2: String,msg3: St
 	
 
 func _internal_enable_and_show_buttons(delay_ms: int):
-	print("called")
 	call_deferred("_show_buttons")
 	if delay_ms > 0:
 		OS.delay_msec(delay_ms)
@@ -156,8 +181,11 @@ func _internal_enable_and_show_buttons(delay_ms: int):
 	button3.disabled = false
 
 func _on_buttons_pressed(id: int):
+	buttons_enabled = false
+	call_deferred("_countdown_node_updater", str(""))
+	call_deferred("_disable_and_hide_buttons", 0)
 	button_pressed_callback.bind(id).call()
-	_disable_and_hide_buttons(100)
+	#_disable_and_hide_buttons(0)
 	subs_waiting = false
 	
 

@@ -39,8 +39,7 @@ func story_flow_2_1():
 
 func story_flow_decision_2():
 	print("story_flow_decision_2")
-	sub_controller.button_pressed_callback = Callable(self, "story_flow_4")
-	sub_controller._enable_and_show_buttons(0, "Sí", "No", "Comerse el jabón")
+	sub_controller.new_question("Sí", "No", "Comerse el jabón", Callable(self, "story_flow_4"), 10)
 
 func story_flow_4(option: int):
 	if option == 1:
@@ -49,6 +48,12 @@ func story_flow_4(option: int):
 	elif option == 2:
 		sub_controller.new_subtitle("Felix", "Me quedo.")
 		
-	else:
+	elif option == 3:
 		sub_controller.new_subtitle("", "Muchos carbohidratos, ¿No crees?")
+	
+	else:
+		sub_controller.new_subtitle("", "Se ha acabado el tiempo.")
+		sub_controller.new_subtitle("", "Lo siento.")
+		sub_controller.new_subtitle("", "Has perdido.")
+		
 
