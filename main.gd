@@ -17,7 +17,7 @@ func _process(delta):
 	pass
 
 func story_flow_1():
-	sub_controller = get_node("/root/Node2D/SubtitleController")
+	sub_controller = $SubtitleController
 	sub_controller.new_subtitle("", "Hoy es 25 de Marzo de 1997, mi nombre es Felix Alderson y tengo 23 años.")
 	sub_controller.new_subtitle("", "Vivo en los apartamentos de la calle Rhapsody nro. 35. No estoy casado ni tengo hijos.")
 	sub_controller.new_subtitle("", "Trabajo en una compañía de seguros llamada SeguraTes... Si, lo sé. Pero quien soy yo para cuestionar decisiones empresariales avanzadas.")

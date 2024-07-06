@@ -1,5 +1,7 @@
 extends Node
 
+# Script para controlar subtítulos y botones de decisiones.
+# Este script debe ser llamado por SubtitleController una vez por escena
 class_name SubtitleController
 
 var button1: Button
@@ -23,12 +25,12 @@ var debug_mode:= false
 
 
 func _ready():
-	subs_node = get_node("Subs")
-	remitent_node = get_node("Remitent")
-	button1 = get_node("Button1")
-	button2 = get_node("Button2")
-	button3 = get_node("Button3")
-	countdown_node = get_node("CountDown")
+	subs_node = $Subs
+	remitent_node = $Remitent
+	button1 = $Button1
+	button2 = $Button2
+	button3 = $Button3
+	countdown_node = $CountDown
 	_hide_buttons()
 	
 	# Start jobs
@@ -85,9 +87,7 @@ func new_subtitle_callback(who: String, msg: String, callback: Callable):
 
 func new_question(label_button1: String, label_button2: String, label_button3: String, callback: Callable, response_time:= -1):
 	if response_time > 0:
-		#var callable = Callable(self, "_question_loop_handler").bind(response_time)
 		Thread.new().start(Callable(self, "_question_loop_handler").bind(response_time))
-		#_question_loop_handler(response_time)
 	
 	button_pressed_callback = callback
 	_enable_and_show_buttons(0, label_button1, label_button2, label_button3)
@@ -179,7 +179,6 @@ func _on_buttons_pressed(id: int):
 	call_deferred("_countdown_node_updater", str(""))
 	call_deferred("_disable_and_hide_buttons", 0)
 	button_pressed_callback.bind(id).call()
-	#_disable_and_hide_buttons(0)
 	subs_waiting = false
 	
 
