@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bky32ytng0klb"
+path="res://.godot/imported/Door Slam.mp3-b0ed39d89720c22fcde0fe6c7c982e49.mp3str"
+
+[deps]
+
+source_file="res://Audios/Door Slam.mp3"
+dest_files=["res://.godot/imported/Door Slam.mp3-b0ed39d89720c22fcde0fe6c7c982e49.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

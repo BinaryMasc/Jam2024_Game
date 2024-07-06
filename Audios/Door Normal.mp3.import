@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bgl2iq0cit2nh"
+path="res://.godot/imported/Door Normal.mp3-c21e15a4f22796a199331693cddfcde3.mp3str"
+
+[deps]
+
+source_file="res://Audios/Door Normal.mp3"
+dest_files=["res://.godot/imported/Door Normal.mp3-c21e15a4f22796a199331693cddfcde3.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

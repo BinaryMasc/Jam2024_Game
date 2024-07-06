@@ -21,7 +21,7 @@ var buttons_enabled := false
 var subs_running_queue = []
 
 var mouse_over:= false
-var debug_mode:= false
+var debug_mode:= true
 
 
 func _ready():

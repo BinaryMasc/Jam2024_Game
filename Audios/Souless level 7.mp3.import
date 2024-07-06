@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bgsqgd4cf7ed8"
+path="res://.godot/imported/Souless level 7.mp3-cd0d8e2999f732efcffb3ed62435efcb.mp3str"
+
+[deps]
+
+source_file="res://Audios/Souless level 7.mp3"
+dest_files=["res://.godot/imported/Souless level 7.mp3-cd0d8e2999f732efcffb3ed62435efcb.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
