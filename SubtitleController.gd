@@ -61,11 +61,11 @@ func _job_subtitles():
 	while true:
 		if subs_running_queue.size() > 0 and not subs_running and not subs_waiting:
 			subs_fast = false
-			call_deferred("_internal_sub_set_sender", subs_running_queue[0].who)
-			_internal_sub_delegate(subs_running_queue[0].msg)
-			
 			if subs_running_queue[0].has_callback:
 				subs_running_queue[0].callback.call()
+				
+			call_deferred("_internal_sub_set_sender", subs_running_queue[0].who)
+			_internal_sub_delegate(subs_running_queue[0].msg)
 			
 			subs_running_queue.remove_at(0)
 			subs_running = false
