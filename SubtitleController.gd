@@ -53,15 +53,14 @@ func _unhandled_input(event):
 
 
 func start_jobs():
-	Thread.new().start(job_subtitles)
+	Thread.new().start(_job_subtitles)
 
-func job_subtitles():
+func _job_subtitles():
 	while true:
 		if subs_running_queue.size() > 0 and not subs_running and not subs_waiting:
 			subs_fast = false
-			call_deferred("internal_sub_set_sender", subs_running_queue[0].who)
-			internal_sub_delegate(subs_running_queue[0].msg)
-			#internal_sub_set_sender(subs_running_queue[0].who)
+			call_deferred("_internal_sub_set_sender", subs_running_queue[0].who)
+			_internal_sub_delegate(subs_running_queue[0].msg)
 			
 			if subs_running_queue[0].has_callback:
 				subs_running_queue[0].callback.call()
@@ -69,7 +68,6 @@ func job_subtitles():
 			subs_running_queue.remove_at(0)
 			subs_running = false
 			subs_waiting = true
-			#print(subs_running_queue)
 			continue
 		OS.delay_msec(100)
 
@@ -86,7 +84,6 @@ func new_subtitle_callback(who: String, msg: String, callback: Callable):
 	subs_running_queue.append(Message.new(who, msg).set_callback(callback))
 
 func new_question(label_button1: String, label_button2: String, label_button3: String, callback: Callable, response_time:= -1):
-	print(response_time)
 	if response_time > 0:
 		#var callable = Callable(self, "_question_loop_handler").bind(response_time)
 		Thread.new().start(Callable(self, "_question_loop_handler").bind(response_time))
@@ -109,15 +106,15 @@ func _question_loop_handler(response_time: int):
 func _countdown_node_updater(time: String):
 	countdown_node.text = time
 
-func internal_sub_delegate(msg):
+func _internal_sub_delegate(msg):
 	subs_running = true
-	var callable = Callable(self, "new_subtitle_sync").bind(msg)
+	var callable = Callable(self, "_new_subtitle_sync").bind(msg)
 	var t = Thread.new()
 	t.start(callable)
 	t.wait_to_finish()
 
 
-func internal_sub_set_sender(who: String):
+func _internal_sub_set_sender(who: String):
 	remitent_node.text = who
 
 func _internal_update_subs(text):
@@ -125,7 +122,7 @@ func _internal_update_subs(text):
 	if subs_node:
 		subs_node.text = text
 
-func new_subtitle_sync(msg):
+func _new_subtitle_sync(msg):
 	var it = 0
 	
 	if debug_mode:
@@ -166,9 +163,6 @@ func _enable_and_show_buttons(delay_ms: int, msg1: String, msg2: String, msg3: S
 	button1.text = msg1
 	button2.text = msg2
 	button3.text = msg3
-	#var callable = Callable(self, "new_subtitle").bind(msj)
-	#Thread.new().start(callable)
-	#var callable = Callable(self, "_internal_enable_and_show_buttons").bind(delay_ms)
 	Thread.new().start(Callable(self, "_internal_enable_and_show_buttons").bind(delay_ms))
 	
 
