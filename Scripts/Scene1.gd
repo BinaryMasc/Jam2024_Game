@@ -41,7 +41,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if change_scene_flag:
-		await get_tree().change_scene_to_file("res://Scenes/Office1.tscn")
+		get_tree().change_scene_to_file("res://Scenes/Office1.tscn")
 
 func story_flow_1():
 	sub_controller.new_subtitle("", "")

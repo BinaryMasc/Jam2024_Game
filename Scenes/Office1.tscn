@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d3i18pkwij44r"]
+[gd_scene load_steps=11 format=3 uid="uid://d3i18pkwij44r"]
 
 [ext_resource type="Script" path="res://Scripts/Scene_office1.gd" id="1_hufta"]
 [ext_resource type="PackedScene" uid="uid://bo6lah0luohoj" path="res://Objects/subtitle_controller.tscn" id="1_rhdff"]
@@ -6,12 +6,16 @@
 [ext_resource type="Script" path="res://Scripts/Office/Reports.gd" id="3_j0yjc"]
 [ext_resource type="Script" path="res://Scripts/Office/Hands.gd" id="5_52owf"]
 [ext_resource type="Texture2D" uid="uid://drfomrbjyxqet" path="res://gratis-png-jabon.png" id="6_81hmn"]
+[ext_resource type="Script" path="res://Scripts/Office/Cubicle.gd" id="7_o627v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lqsrd"]
 size = Vector2(69, 61)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vbrf8"]
 radius = 44.0114
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gf33k"]
+radius = 49.0918
 
 [node name="Office1" type="Node2D"]
 script = ExtResource("1_hufta")
@@ -40,3 +44,15 @@ texture = ExtResource("6_81hmn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hands"]
 shape = SubResource("CircleShape2D_vbrf8")
+
+[node name="Cubicle" type="Area2D" parent="."]
+position = Vector2(714, 156)
+script = ExtResource("7_o627v")
+
+[node name="Sprite2D" type="Sprite2D" parent="Cubicle"]
+position = Vector2(-1.90735e-06, -4)
+scale = Vector2(0.0925, 0.0925)
+texture = ExtResource("6_81hmn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Cubicle"]
+shape = SubResource("CircleShape2D_gf33k")

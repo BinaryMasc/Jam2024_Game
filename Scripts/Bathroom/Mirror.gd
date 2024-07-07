@@ -10,7 +10,7 @@ var sub_controller: SubtitleController
 
 func _ready():
 	sub_controller = get_node("../SubtitleController")
-	story_controller = get_node("../../Scene_1")
+	story_controller = get_tree().root.get_child(0)
 	connect("mouse_entered", _on_mouse_entered)
 	connect("mouse_exited", _on_mouse_exited)
 	
