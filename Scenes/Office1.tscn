@@ -1,7 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3i18pkwij44r"]
+[gd_scene load_steps=9 format=3 uid="uid://d3i18pkwij44r"]
 
 [ext_resource type="Script" path="res://Scripts/Scene_office1.gd" id="1_hufta"]
 [ext_resource type="PackedScene" uid="uid://bo6lah0luohoj" path="res://Objects/subtitle_controller.tscn" id="1_rhdff"]
+[ext_resource type="Texture2D" uid="uid://c8hckkbh0yfuy" path="res://icon.svg" id="3_8xkyd"]
+[ext_resource type="Script" path="res://Scripts/Office/Reports.gd" id="3_j0yjc"]
+[ext_resource type="Script" path="res://Scripts/Office/Hands.gd" id="5_52owf"]
+[ext_resource type="Texture2D" uid="uid://drfomrbjyxqet" path="res://gratis-png-jabon.png" id="6_81hmn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lqsrd"]
+size = Vector2(69, 61)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vbrf8"]
+radius = 44.0114
 
 [node name="Office1" type="Node2D"]
 script = ExtResource("1_hufta")
@@ -9,7 +19,24 @@ script = ExtResource("1_hufta")
 [node name="SubtitleController" parent="." instance=ExtResource("1_rhdff")]
 
 [node name="Reports" type="Area2D" parent="."]
+position = Vector2(232, 184)
+script = ExtResource("3_j0yjc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Reports"]
+position = Vector2(4, 3)
+shape = SubResource("RectangleShape2D_lqsrd")
 
 [node name="Sprite2D" type="Sprite2D" parent="Reports"]
+texture = ExtResource("3_8xkyd")
+
+[node name="Hands" type="Area2D" parent="."]
+position = Vector2(392, 269)
+script = ExtResource("5_52owf")
+
+[node name="Sprite2D" type="Sprite2D" parent="Hands"]
+position = Vector2(4.00001, 1.00001)
+scale = Vector2(0.135, 0.135)
+texture = ExtResource("6_81hmn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hands"]
+shape = SubResource("CircleShape2D_vbrf8")

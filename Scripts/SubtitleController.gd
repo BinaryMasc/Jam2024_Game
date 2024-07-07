@@ -14,6 +14,7 @@ var subs_node: Label
 var countdown_node: Label
 var remitent_node: Label
 var subs_text: String
+var jobs_active:= true
 var subs_running:= false
 var subs_waiting:= false
 var subs_fast:= false
@@ -58,7 +59,7 @@ func start_jobs():
 	Thread.new().start(_job_subtitles)
 
 func _job_subtitles():
-	while true:
+	while jobs_active:
 		if subs_running_queue.size() > 0 and not subs_running and not subs_waiting:
 			subs_fast = false
 			if subs_running_queue[0].has_callback:
@@ -96,8 +97,11 @@ func new_question(label_button1: String, label_button2: String, label_button3: S
 	button_pressed_callback = callback
 	_enable_and_show_buttons.bind(0, label_button1, label_button2, label_button3).call_deferred()
 
+func clear_jobs():
+	jobs_active = false
+
 func _question_loop_handler(response_time: int):
-	var time = response_time	
+	var time = response_time
 	buttons_enabled = true
 	
 	while time > 0 and buttons_enabled:

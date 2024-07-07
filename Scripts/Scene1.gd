@@ -5,6 +5,7 @@ class_name Scene_1
 
 var first_interaction:= true
 var second_interaction:= true
+var change_scene_flag:= false
 
 var sub_controller: SubtitleController
 var cat: Cat
@@ -13,7 +14,6 @@ var nail_polish: Nail_polish
 var mirror: Mirror
 var door: Door
 var flowerpot: Flowerpot
-var simultaneous_scene
 
 
 
@@ -28,7 +28,6 @@ func _ready():
 	nail_polish = $Nail_polish
 	door = $Door
 	flowerpot = $Flowerpot
-	simultaneous_scene = preload("res://Scenes/Office1.tscn").instantiate()
 	
 	cat.connect("cat_pressed_event", _on_cat_pressed)
 	soap.connect("soap_pressed_event", _on_soap_pressed)
@@ -41,7 +40,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if change_scene_flag:
+		await get_tree().change_scene_to_file("res://Scenes/Office1.tscn")
 
 func story_flow_1():
 	sub_controller.new_subtitle("", "")
@@ -86,7 +86,6 @@ func story_flow_5(option: int):
 		sub_controller.new_subtitle("", "Se te hizo tarde tomar una decisión y saliste con las manos mojadas.")
 	
 	sub_controller.new_subtitle_callback("", "", _change_scene)
-	#sub_controller.new_subtitle("", "cambio de escena.")
 	
 
 func _on_cat_pressed():
@@ -183,7 +182,7 @@ func _scene_end():
 
 
 func _change_scene():
-	
-	pass
+	sub_controller.clear_jobs()
+	change_scene_flag = true
 
 

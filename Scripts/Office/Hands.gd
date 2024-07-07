@@ -1,6 +1,6 @@
 extends Area2D
 
-class_name Reports
+class_name Hands
 
 
 var mouse_over:= false
@@ -16,7 +16,7 @@ func _ready():
 	connect("mouse_exited", _on_mouse_exited)
 	
 
-signal reports_pressed_event()
+signal hands_pressed_event()
 
 #func _process(delta):
 #	pass
@@ -32,6 +32,6 @@ func _input(event):
 		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT and mouse_over:
 			#print("click sobre el objeto")
 			if sub_controller.allow_external_interactions():
-				emit_signal("reports_pressed_event")
+				emit_signal("hands_pressed_event")
 			return
 		
