@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=3 uid="uid://bo6lah0luohoj"]
+
+[ext_resource type="Script" path="res://Scripts/SubtitleController.gd" id="1_p135j"]
+[ext_resource type="Texture2D" uid="uid://bh4m454ewvgi8" path="res://Sprites/Subs/squares-black-texture.jpg" id="2_i1d8r"]
+
+[node name="SubtitleController" type="Node"]
+script = ExtResource("1_p135j")
+
+[node name="Button1" type="Button" parent="."]
+offset_left = 374.0
+offset_top = 361.0
+offset_right = 494.0
+offset_bottom = 434.0
+text = "Sí"
+
+[node name="Button2" type="Button" parent="."]
+offset_left = 526.0
+offset_top = 361.0
+offset_right = 646.0
+offset_bottom = 434.0
+text = "Sí"
+
+[node name="Button3" type="Button" parent="."]
+offset_left = 674.0
+offset_top = 361.0
+offset_right = 794.0
+offset_bottom = 434.0
+text = "Sí"
+
+[node name="Remitent" type="Label" parent="."]
+z_index = 9
+offset_left = 66.0
+offset_top = 483.0
+offset_right = 409.0
+offset_bottom = 522.0
+theme_override_colors/font_color = Color(0.898039, 0.921569, 0.478431, 1)
+theme_override_font_sizes/font_size = 25
+
+[node name="Subs" type="Label" parent="."]
+z_index = 9
+offset_left = 80.0
+offset_top = 525.0
+offset_right = 1127.0
+offset_bottom = 638.0
+theme_override_colors/font_color = Color(1, 0.949186, 0.875163, 1)
+theme_override_font_sizes/font_size = 25
+autowrap_mode = 2
+
+[node name="CountDown" type="Label" parent="."]
+offset_left = 497.0
+offset_top = 278.0
+offset_right = 678.0
+offset_bottom = 346.0
+theme_override_colors/font_color = Color(0.726223, 3.41728e-06, 5.77569e-07, 1)
+theme_override_font_sizes/font_size = 25
+horizontal_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(583.5, 560)
+scale = Vector2(0.631771, 0.174074)
+texture = ExtResource("2_i1d8r")
+
+[connection signal="pressed" from="Button1" to="." method="_on_button1_pressed"]
+[connection signal="pressed" from="Button2" to="." method="_on_button2_pressed"]
+[connection signal="pressed" from="Button3" to="." method="_on_button3_pressed"]

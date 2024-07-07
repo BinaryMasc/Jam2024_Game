@@ -13,6 +13,7 @@ var nail_polish: Nail_polish
 var mirror: Mirror
 var door: Door
 var flowerpot: Flowerpot
+var simultaneous_scene
 
 
 
@@ -27,6 +28,7 @@ func _ready():
 	nail_polish = $Nail_polish
 	door = $Door
 	flowerpot = $Flowerpot
+	simultaneous_scene = preload("res://Scenes/Office1.tscn").instantiate()
 	
 	cat.connect("cat_pressed_event", _on_cat_pressed)
 	soap.connect("soap_pressed_event", _on_soap_pressed)
@@ -83,7 +85,9 @@ func story_flow_5(option: int):
 	else:
 		sub_controller.new_subtitle("", "Se te hizo tarde tomar una decisión y saliste con las manos mojadas.")
 	
-	sub_controller.new_subtitle("", "cambio de escena.")
+	sub_controller.new_subtitle_callback("", "", _change_scene)
+	#sub_controller.new_subtitle("", "cambio de escena.")
+	
 
 func _on_cat_pressed():
 	sub_controller.new_subtitle("Mephisto", "...")
@@ -176,3 +180,10 @@ func _scene_end():
 	sub_controller.new_subtitle("Tú", "Demonios, mis manos siguen mojadas.")
 	sub_controller.new_subtitle_callback("Tú", "¿Debería secarme las manos?", story_flow_decision_3)
 	# conecta con la función story_flow_5 para concluír la escena
+
+
+func _change_scene():
+	
+	pass
+
+

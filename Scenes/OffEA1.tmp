@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3i18pkwij44r"]
+
+[ext_resource type="Script" path="res://Scripts/Scene_office1.gd" id="1_hufta"]
+[ext_resource type="PackedScene" uid="uid://bo6lah0luohoj" path="res://Objects/subtitle_controller.tscn" id="1_rhdff"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_hufta")
+
+[node name="SubtitleController" parent="." instance=ExtResource("1_rhdff")]
+
+[node name="Reports" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Reports"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Reports"]

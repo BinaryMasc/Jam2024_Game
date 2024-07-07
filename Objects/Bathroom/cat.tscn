@@ -1,0 +1,52 @@
+[gd_scene load_steps=10 format=3 uid="uid://mf1s4phqxfi0"]
+
+[ext_resource type="Script" path="res://Scripts/Bathroom/Cat.gd" id="1_hm086"]
+[ext_resource type="Texture2D" uid="uid://1d54ltgoglti" path="res://Sprites/1.png" id="2_tyd3h"]
+[ext_resource type="Texture2D" uid="uid://k5yh0d0b6x6l" path="res://Sprites/2.png" id="3_15gxh"]
+[ext_resource type="Texture2D" uid="uid://hkvepifa8ay3" path="res://Sprites/3.png" id="4_luhla"]
+[ext_resource type="Texture2D" uid="uid://bo05lmae2lq1v" path="res://Sprites/4.png" id="5_c76y3"]
+[ext_resource type="Texture2D" uid="uid://cu224m8svl622" path="res://Sprites/5.png" id="6_g5k66"]
+[ext_resource type="Texture2D" uid="uid://dm01w2h07780i" path="res://Sprites/6.png" id="7_hp55f"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nl4lk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_tyd3h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_15gxh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_luhla")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_c76y3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_g5k66")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_hp55f")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lqonf"]
+size = Vector2(231, 239.25)
+
+[node name="Cat" type="Area2D"]
+position = Vector2(595, 108)
+script = ExtResource("1_hm086")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-7.43738, 2.99117)
+scale = Vector2(0.0939327, 0.0939327)
+sprite_frames = SubResource("SpriteFrames_nl4lk")
+frame_progress = 0.686368
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.937378, 0.366165)
+shape = SubResource("RectangleShape2D_lqonf")
