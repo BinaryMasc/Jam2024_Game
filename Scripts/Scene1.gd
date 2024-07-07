@@ -50,8 +50,7 @@ func story_flow_1():
 	sub_controller.new_subtitle("", "Estas en el baño de la oficina, llevas un tiempo ahi, pero quizás puedas hacer algo más aquí antes de volver a tu puesto.");
 
 # quedarme?
-func story_flow_decision_2():
-	#print("story_flow_decision_2")
+func story_flow_decision_stay():
 	sub_controller.new_question("Sí", "", "No", story_flow_4)
 	#sub_controller.new_subtitle("Felix", "¿Debería quedarme más tiempo aquí?")
 
@@ -71,6 +70,7 @@ func story_flow_4(option: int):
 		#sub_controller.new_subtitle("", "Ir a la oficina...")
 		_scene_end()
 
+# Llamado al finalizar la escena
 func story_flow_5(option: int):
 	if option == 1:
 		sub_controller.new_subtitle("", "Intentas desesperadamente coger papel higiénico para secarte las manos.")
@@ -97,7 +97,7 @@ func _on_mirror_pressed():
 	sub_controller.new_subtitle("Tú", "Bueno, no me veo tan mal para ser mi primera semana.")
 	sub_controller.new_subtitle("Mephisto", "¿Estas seguro de que seguirás pensando lo mismo la próxima?")
 	_validate_first_interaction()
-	sub_controller.new_subtitle_callback("Tú", "¿Debería quedarme más tiempo aquí?", story_flow_decision_2)
+	#sub_controller.new_subtitle_callback("Tú", "¿Debería quedarme más tiempo aquí?", story_flow_decision_stay)
 
 var nail_polish_pressed:= false
 func _on_nail_polish_pressed():
@@ -107,7 +107,7 @@ func _on_nail_polish_pressed():
 	sub_controller.new_subtitle("Tú", "Si, la oficina no es muy grande por lo que tenemos un baño por sección. Y es compartido entre ambos sexos...")
 	sub_controller.new_subtitle("Needy", "Quizás, ya es el momento de tener a alguien en tu vida.")
 	_validate_first_interaction()
-	sub_controller.new_subtitle_callback("Tú", "¿Debería quedarme más tiempo aquí?", story_flow_decision_2)
+	#sub_controller.new_subtitle_callback("Tú", "¿Debería quedarme más tiempo aquí?", story_flow_decision_stay)
 
 var soap_pressed:= false
 func _on_soap_pressed():
@@ -115,12 +115,12 @@ func _on_soap_pressed():
 		return
 	#print("Señal recibida con argumento: ", argumento)
 	sub_controller.new_subtitle("Tú", "Que suerte, por lo menos cumplen con las reglas básicas de higiene en este lugar.")
-	sub_controller.new_subtitle("Cinical", "Te bañaste hoy ¿Verdad?")
+	sub_controller.new_subtitle("Cynical", "Te bañaste hoy ¿Verdad?")
 	sub_controller.new_subtitle("", "...")
 	sub_controller.new_subtitle("Cinical", "¡¿Verdad?!")
 	soap_pressed = true
 	_validate_first_interaction()
-	sub_controller.new_subtitle_callback("Tú", "¿Debería quedarme más tiempo aquí?", story_flow_decision_2)
+	#sub_controller.new_subtitle_callback("Tú", "¿Debería quedarme más tiempo aquí?", story_flow_decision_stay)
 	#sub_controller.new_subtitle_callback("Tú", "¿Debería quedarme más tiempo aquí?", story_flow_decision_2)
 
 var flowerpot_pressed:= false
@@ -145,7 +145,7 @@ func _on_door_pressed():
 	sub_controller.new_subtitle("", "Antes de eso, intentas concentrarte para mezclarte con tus pensamientos y reflexionar.")
 	sub_controller.new_subtitle("", "¿Pero reflexionar sobre qué? Esto no está resultando como esperabas.")
 	sub_controller.new_subtitle("Tú", "¿Quizás deberías quedarte un poco más de tiempo?")
-	sub_controller.new_subtitle_callback("Tú", "¿Quizás deberías quedarte un poco más de tiempo?", story_flow_decision_2)
+	sub_controller.new_subtitle_callback("Tú", "¿Quizás deberías quedarte un poco más de tiempo?", story_flow_decision_stay)
 
 	door_pressed = true
 	#_validate_first_interaction()
