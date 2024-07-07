@@ -17,11 +17,11 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+#func _process(delta):
+#	pass
 
 
-signal cat_pressed_event(argumento)
+signal cat_pressed_event()
 
 func _on_mouse_entered():
 	mouse_over = true
@@ -33,7 +33,7 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT and mouse_over:
 			#print("click sobre el objeto")
-			if not sub_controller.is_subs_running() and not sub_controller.buttons_enabled and sub_controller.get_subs_size() == 0:
+			if sub_controller.allow_external_interactions():
 				emit_signal("cat_pressed_event")
 				#animation.show()
 				animation.play()

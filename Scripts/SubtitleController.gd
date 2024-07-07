@@ -38,9 +38,9 @@ func _ready():
 
 
 
-@warning_ignore("unused_parameter")
-func _process(delta):
-	pass
+#@warning_ignore("unused_parameter")
+#func _process(delta):
+	#pass
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
@@ -82,23 +82,34 @@ func get_subs_size():
 func is_subs_running():
 	return subs_running
 
+# Devuelve true si los controles o los subtitulos no están trabajando
+func allow_external_interactions():
+	return not subs_running and not buttons_enabled and get_subs_size() == 0
+
 func new_subtitle_callback(who: String, msg: String, callback: Callable):
 	subs_running_queue.append(Message.new(who, msg).set_callback(callback))
 
 func new_question(label_button1: String, label_button2: String, label_button3: String, callback: Callable, response_time:= -1):
 	if response_time > 0:
-		Thread.new().start(Callable(self, "_question_loop_handler").bind(response_time))
+		Thread.new().start(_question_loop_handler.bind(response_time))
 	
 	button_pressed_callback = callback
-	_enable_and_show_buttons(0, label_button1, label_button2, label_button3)
+	_enable_and_show_buttons.bind(0, label_button1, label_button2, label_button3).call_deferred()
 
 func _question_loop_handler(response_time: int):
-	var time = response_time
+	var time = response_time	
 	buttons_enabled = true
 	
 	while time > 0 and buttons_enabled:
 		call_deferred("_countdown_node_updater", str(time))
-		OS.delay_msec(1000)
+		#print("en bucle")
+		var temp = 0
+		while temp < 1000:
+			if not buttons_enabled:	#prevent bug after change state
+				break
+			OS.delay_msec(100)
+			temp += 100
+		
 		time -= 1
 	if time == 0:
 		_on_buttons_pressed(-1)
@@ -108,9 +119,9 @@ func _countdown_node_updater(time: String):
 
 func _internal_sub_delegate(msg):
 	subs_running = true
-	var callable = Callable(self, "_new_subtitle_sync").bind(msg)
+	#var callable = Callable(self, "_new_subtitle_sync").bind(msg)
 	var t = Thread.new()
-	t.start(callable)
+	t.start(_new_subtitle_sync.bind(msg))
 	t.wait_to_finish()
 
 
@@ -155,7 +166,8 @@ func _hide_buttons():
 	
 func _show_buttons():
 	button1.show()
-	button2.show()
+	if button2.text != "":
+		button2.show()
 	button3.show()
 	
 func _enable_and_show_buttons(delay_ms: int, msg1: String, msg2: String, msg3: String):
@@ -163,7 +175,8 @@ func _enable_and_show_buttons(delay_ms: int, msg1: String, msg2: String, msg3: S
 	button1.text = msg1
 	button2.text = msg2
 	button3.text = msg3
-	Thread.new().start(Callable(self, "_internal_enable_and_show_buttons").bind(delay_ms))
+	_internal_enable_and_show_buttons.bind(delay_ms).call_deferred()
+	#Thread.new().start()
 	
 
 func _internal_enable_and_show_buttons(delay_ms: int):
@@ -183,16 +196,12 @@ func _on_buttons_pressed(id: int):
 	
 
 func _on_button1_pressed():
-	print("botón 1 presionado")
 	_on_buttons_pressed(1)
 	
 
 func _on_button2_pressed():
-	print("botón 2 presionado")
 	_on_buttons_pressed(2)
 
 
 func _on_button3_pressed():
-	print("botón 3 presionado")
 	_on_buttons_pressed(3)
-	
