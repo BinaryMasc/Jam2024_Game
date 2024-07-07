@@ -1,0 +1,24 @@
+[gd_scene load_steps=8 format=3 uid="uid://dc1vfulg06tea"]
+
+[ext_resource type="Script" path="res://Scripts/Bathroom2.gd" id="1_arcdm"]
+[ext_resource type="PackedScene" uid="uid://bo6lah0luohoj" path="res://Objects/subtitle_controller.tscn" id="1_ta0fc"]
+[ext_resource type="PackedScene" uid="uid://mf1s4phqxfi0" path="res://Objects/Bathroom/cat.tscn" id="3_fgpa2"]
+[ext_resource type="PackedScene" uid="uid://cbb0o8d4d1p4e" path="res://Objects/Bathroom/door.tscn" id="4_8gs5v"]
+[ext_resource type="PackedScene" uid="uid://ccgpnol1ogfpp" path="res://Objects/Bathroom/flowerpot.tscn" id="5_5qas0"]
+[ext_resource type="PackedScene" uid="uid://v3ektsaokuax" path="res://Objects/Bathroom/mirror.tscn" id="6_nsb4h"]
+[ext_resource type="PackedScene" uid="uid://b50unxpvwfcvw" path="res://Objects/Bathroom/soap.tscn" id="8_80j05"]
+
+[node name="Bathroom2" type="Node2D"]
+script = ExtResource("1_arcdm")
+
+[node name="SubtitleController" parent="." instance=ExtResource("1_ta0fc")]
+
+[node name="Cat" parent="." instance=ExtResource("3_fgpa2")]
+
+[node name="Door" parent="." instance=ExtResource("4_8gs5v")]
+
+[node name="Flowerpot" parent="." instance=ExtResource("5_5qas0")]
+
+[node name="Mirror" parent="." instance=ExtResource("6_nsb4h")]
+
+[node name="Soap" parent="." instance=ExtResource("8_80j05")]

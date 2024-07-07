@@ -1,20 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://v3ektsaokuax"]
+[gd_scene load_steps=3 format=3 uid="uid://v3ektsaokuax"]
 
 [ext_resource type="Script" path="res://Scripts/Bathroom/Mirror.gd" id="1_vou3m"]
-[ext_resource type="Texture2D" uid="uid://c8hckkbh0yfuy" path="res://icon.svg" id="2_8wydn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lmdly"]
-size = Vector2(109.5, 166.5)
+size = Vector2(138.25, 341.5)
 
 [node name="Mirror" type="Area2D"]
 position = Vector2(803, 118)
 script = ExtResource("1_vou3m")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(6.75, -8.25)
+position = Vector2(-9.125, -11.75)
 shape = SubResource("RectangleShape2D_lmdly")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(7.50006, -6)
-scale = Vector2(0.820313, 1.25)
-texture = ExtResource("2_8wydn")

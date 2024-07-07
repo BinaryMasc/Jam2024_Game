@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://ccgpnol1ogfpp"]
+[gd_scene load_steps=3 format=3 uid="uid://ccgpnol1ogfpp"]
 
 [ext_resource type="Script" path="res://Scripts/Bathroom/Flowerpot.gd" id="1_tsps7"]
-[ext_resource type="Texture2D" uid="uid://c26dtvddip0ti" path="res://Sprites/mario-sprite-png-png-transparent-layers-download-63221-768x768.png" id="2_jcowk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3t186"]
 size = Vector2(44, 44)
@@ -13,8 +12,3 @@ script = ExtResource("1_tsps7")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(12, 12)
 shape = SubResource("RectangleShape2D_3t186")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(14.0001, 14.9999)
-scale = Vector2(0.0800781, 0.0716145)
-texture = ExtResource("2_jcowk")

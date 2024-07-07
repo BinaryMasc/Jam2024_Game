@@ -21,6 +21,11 @@ var flowerpot: Flowerpot
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$WC_sound.play()
+	$Bathroom_theme.play()
+	$Bathroom_theme.stream.loop = true
+	$Ambient_theme.play()
+	$Ambient_theme.stream.loop = true
 	sub_controller = $SubtitleController
 	cat = $Cat
 	soap = $Soap

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://dok0sf8yn78op"]
+[gd_scene load_steps=13 format=3 uid="uid://dok0sf8yn78op"]
 
 [ext_resource type="Script" path="res://Scripts/Scene1.gd" id="1_cmajm"]
 [ext_resource type="PackedScene" uid="uid://ccgpnol1ogfpp" path="res://Objects/Bathroom/flowerpot.tscn" id="2_etu5p"]
@@ -8,20 +8,60 @@
 [ext_resource type="PackedScene" uid="uid://b50unxpvwfcvw" path="res://Objects/Bathroom/soap.tscn" id="6_ynr7n"]
 [ext_resource type="PackedScene" uid="uid://mf1s4phqxfi0" path="res://Objects/Bathroom/cat.tscn" id="7_tmc6o"]
 [ext_resource type="PackedScene" uid="uid://bo6lah0luohoj" path="res://Objects/subtitle_controller.tscn" id="8_6p7dq"]
+[ext_resource type="Texture2D" uid="uid://pytlofk8cjwc" path="res://Sprites/Backgrounds/bano2.2.png" id="10_6arfk"]
+[ext_resource type="Texture2D" uid="uid://ck10w2k83o8q3" path="res://Sprites/Backgrounds/lineas.png" id="10_24odo"]
+[ext_resource type="AudioStream" uid="uid://co3e6c7q1dwje" path="res://Audios/bathroom.mp3" id="11_1jim8"]
+[ext_resource type="AudioStream" uid="uid://5qvqj5a6c0u3" path="res://Audios/Doro el inodoro.mp3" id="11_wde7m"]
 
 [node name="Scene_1" type="Node2D"]
 script = ExtResource("1_cmajm")
 
+[node name="SubtitleController" parent="." instance=ExtResource("8_6p7dq")]
+
 [node name="Flowerpot" parent="." instance=ExtResource("2_etu5p")]
+position = Vector2(467, 38)
+scale = Vector2(1.23612, 1.52688)
 
 [node name="Door" parent="." instance=ExtResource("3_g4efw")]
 
 [node name="Nail_polish" parent="." instance=ExtResource("4_onkjg")]
+position = Vector2(387, 406)
 
 [node name="Mirror" parent="." instance=ExtResource("5_wsj0g")]
+position = Vector2(218, 161)
+rotation = -0.0233826
 
 [node name="Soap" parent="." instance=ExtResource("6_ynr7n")]
+position = Vector2(400, 441)
 
 [node name="Cat" parent="." instance=ExtResource("7_tmc6o")]
+position = Vector2(392, 222)
 
-[node name="SubtitleController" parent="." instance=ExtResource("8_6p7dq")]
+[node name="Lineas2" type="Sprite2D" parent="."]
+position = Vector2(582.079, 176.554)
+rotation = 1.57079
+scale = Vector2(0.551003, 1.12313)
+texture = ExtResource("10_24odo")
+
+[node name="Lineas" type="Sprite2D" parent="."]
+position = Vector2(515, 358)
+scale = Vector2(1, 0.72963)
+texture = ExtResource("10_24odo")
+
+[node name="Bano2_2" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(578, 265.75)
+scale = Vector2(0.541667, 0.534722)
+texture = ExtResource("10_6arfk")
+
+[node name="Ambient_theme" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(2304, 984)
+stream = ExtResource("11_wde7m")
+
+[node name="WC_sound" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(1152, 492)
+stream = ExtResource("11_wde7m")
+
+[node name="Bathroom_theme" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(576, 246)
+stream = ExtResource("11_1jim8")

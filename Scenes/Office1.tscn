@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d3i18pkwij44r"]
+[gd_scene load_steps=19 format=3 uid="uid://d3i18pkwij44r"]
 
 [ext_resource type="Script" path="res://Scripts/Scene_office1.gd" id="1_hufta"]
 [ext_resource type="PackedScene" uid="uid://bo6lah0luohoj" path="res://Objects/subtitle_controller.tscn" id="1_rhdff"]
@@ -7,6 +7,14 @@
 [ext_resource type="Script" path="res://Scripts/Office/Hands.gd" id="5_52owf"]
 [ext_resource type="Texture2D" uid="uid://drfomrbjyxqet" path="res://gratis-png-jabon.png" id="6_81hmn"]
 [ext_resource type="Script" path="res://Scripts/Office/Cubicle.gd" id="7_o627v"]
+[ext_resource type="Texture2D" uid="uid://7ahrvtj2pvao" path="res://Sprites/Backgrounds/oficina1.png" id="8_ymcuy"]
+[ext_resource type="Texture2D" uid="uid://ck10w2k83o8q3" path="res://Sprites/Backgrounds/lineas.png" id="9_mf2xw"]
+[ext_resource type="AudioStream" uid="uid://c3dony5ofgy" path="res://Audios/Office_backround.mp3" id="10_qyox0"]
+[ext_resource type="Texture2D" uid="uid://cckhgmmtliufc" path="res://Sprites/Characters/haru.png" id="11_7rctl"]
+[ext_resource type="Texture2D" uid="uid://44r3kwqmdqjg" path="res://Sprites/Characters/jefe.png" id="12_xn841"]
+[ext_resource type="Texture2D" uid="uid://e8nitwgf1jx0" path="res://Sprites/Characters/vicia.png" id="13_nsebj"]
+[ext_resource type="Texture2D" uid="uid://c6kom7r2wkmpx" path="res://Sprites/Characters/ibra.png" id="14_junn2"]
+[ext_resource type="Texture2D" uid="uid://bybkgplu81wdx" path="res://Sprites/Characters/alox.png" id="15_umdgo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lqsrd"]
 size = Vector2(69, 61)
@@ -23,6 +31,7 @@ script = ExtResource("1_hufta")
 [node name="SubtitleController" parent="." instance=ExtResource("1_rhdff")]
 
 [node name="Reports" type="Area2D" parent="."]
+visible = false
 position = Vector2(232, 184)
 script = ExtResource("3_j0yjc")
 
@@ -34,6 +43,7 @@ shape = SubResource("RectangleShape2D_lqsrd")
 texture = ExtResource("3_8xkyd")
 
 [node name="Hands" type="Area2D" parent="."]
+visible = false
 position = Vector2(392, 269)
 script = ExtResource("5_52owf")
 
@@ -46,13 +56,64 @@ texture = ExtResource("6_81hmn")
 shape = SubResource("CircleShape2D_vbrf8")
 
 [node name="Cubicle" type="Area2D" parent="."]
-position = Vector2(714, 156)
+position = Vector2(278, 390)
 script = ExtResource("7_o627v")
-
-[node name="Sprite2D" type="Sprite2D" parent="Cubicle"]
-position = Vector2(-1.90735e-06, -4)
-scale = Vector2(0.0925, 0.0925)
-texture = ExtResource("6_81hmn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Cubicle"]
 shape = SubResource("CircleShape2D_gf33k")
+
+[node name="Oficina1" type="Sprite2D" parent="."]
+z_index = -2
+position = Vector2(577.5, 291.25)
+scale = Vector2(0.561979, 0.506019)
+texture = ExtResource("8_ymcuy")
+
+[node name="Lineas" type="Sprite2D" parent="."]
+position = Vector2(629, 411)
+scale = Vector2(0.879687, 0.835185)
+texture = ExtResource("9_mf2xw")
+
+[node name="Lineas2" type="Sprite2D" parent="Lineas"]
+z_index = -1
+position = Vector2(-55.3784, 204.164)
+rotation = 1.57079
+scale = Vector2(1.20792, 1.32081)
+texture = ExtResource("9_mf2xw")
+
+[node name="OfficeAmbient" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("10_qyox0")
+
+[node name="Alice" type="Sprite2D" parent="."]
+visible = false
+z_index = -1
+position = Vector2(872, 221)
+scale = Vector2(0.52, 0.52)
+texture = ExtResource("11_7rctl")
+
+[node name="Jefe" type="Sprite2D" parent="."]
+visible = false
+z_index = -1
+position = Vector2(893, 266)
+scale = Vector2(-0.470785, 0.48)
+texture = ExtResource("12_xn841")
+
+[node name="Freddy" type="Sprite2D" parent="."]
+visible = false
+z_index = -1
+position = Vector2(555, 281)
+scale = Vector2(-0.532501, 0.4675)
+texture = ExtResource("13_nsebj")
+
+[node name="Rafael" type="Sprite2D" parent="."]
+visible = false
+z_index = -1
+position = Vector2(766, 269)
+scale = Vector2(0.5, 0.501388)
+texture = ExtResource("14_junn2")
+
+[node name="Hector" type="Sprite2D" parent="."]
+visible = false
+z_index = -1
+position = Vector2(941, 265)
+scale = Vector2(0.494688, 0.494688)
+texture = ExtResource("15_umdgo")

@@ -22,7 +22,9 @@ var buttons_enabled := false
 var subs_running_queue = []
 
 var mouse_over:= false
-var debug_mode:= true
+var debug_mode:= false
+
+var sound_click: AudioStreamPlayer2D
 
 
 func _ready():
@@ -32,6 +34,7 @@ func _ready():
 	button2 = $Button2
 	button3 = $Button3
 	countdown_node = $CountDown
+	sound_click = $Click_sound
 	_hide_buttons()
 	
 	# Start jobs
@@ -46,6 +49,7 @@ func _ready():
 func _unhandled_input(event):
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		if subs_waiting:
+			sound_click.play()
 			subs_waiting = false
 			subs_fast = false
 		else:

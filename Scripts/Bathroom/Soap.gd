@@ -14,7 +14,7 @@ func _ready():
 	
 	connect("mouse_entered", _on_mouse_entered)
 	connect("mouse_exited", _on_mouse_exited)
-	
+
 
 signal soap_pressed_event()
 
