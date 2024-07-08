@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://d3i18pkwij44r"]
+[gd_scene load_steps=21 format=3 uid="uid://d3i18pkwij44r"]
 
 [ext_resource type="Script" path="res://Scripts/Scene_office1.gd" id="1_hufta"]
 [ext_resource type="PackedScene" uid="uid://bo6lah0luohoj" path="res://Objects/subtitle_controller.tscn" id="1_rhdff"]
@@ -15,6 +15,8 @@
 [ext_resource type="Texture2D" uid="uid://e8nitwgf1jx0" path="res://Sprites/Characters/vicia.png" id="13_nsebj"]
 [ext_resource type="Texture2D" uid="uid://c6kom7r2wkmpx" path="res://Sprites/Characters/ibra.png" id="14_junn2"]
 [ext_resource type="Texture2D" uid="uid://bybkgplu81wdx" path="res://Sprites/Characters/alox.png" id="15_umdgo"]
+[ext_resource type="Texture2D" uid="uid://bebhrc581mth0" path="res://Sprites/Backgrounds/oficina2.png" id="16_pmhc1"]
+[ext_resource type="AudioStream" uid="uid://bgl2iq0cit2nh" path="res://Audios/Door Normal.mp3" id="17_85gmb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lqsrd"]
 size = Vector2(69, 61)
@@ -81,6 +83,7 @@ scale = Vector2(1.20792, 1.32081)
 texture = ExtResource("9_mf2xw")
 
 [node name="OfficeAmbient" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(563, 303)
 stream = ExtResource("10_qyox0")
 
 [node name="Alice" type="Sprite2D" parent="."]
@@ -117,3 +120,14 @@ z_index = -1
 position = Vector2(941, 265)
 scale = Vector2(0.494688, 0.494688)
 texture = ExtResource("15_umdgo")
+
+[node name="Mike" type="Sprite2D" parent="."]
+visible = false
+z_index = -2
+position = Vector2(577.556, 329)
+scale = Vector2(0.57037, 0.57037)
+texture = ExtResource("16_pmhc1")
+
+[node name="Door_sound" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(-46, 311)
+stream = ExtResource("17_85gmb")

@@ -55,11 +55,11 @@ scale = Vector2(0.541667, 0.534722)
 texture = ExtResource("10_6arfk")
 
 [node name="Ambient_theme" type="AudioStreamPlayer2D" parent="."]
-position = Vector2(2304, 984)
+position = Vector2(596, 287)
 stream = ExtResource("11_wde7m")
 
 [node name="WC_sound" type="AudioStreamPlayer2D" parent="."]
-position = Vector2(1152, 492)
+position = Vector2(673, 122)
 stream = ExtResource("11_wde7m")
 
 [node name="Bathroom_theme" type="AudioStreamPlayer2D" parent="."]

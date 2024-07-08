@@ -18,13 +18,14 @@ var show_freddy:= false
 var show_rafael:= false
 var show_hector:= false
 var show_alice:= false
-
+var show_mike:= false
 
 func _ready():
 	sub_controller = $SubtitleController
 	reports = $Reports
 	hands = $Hands
 	cubicle = $Cubicle
+	$Door_sound.play()
 	$OfficeAmbient.stream.loop = true
 	$OfficeAmbient.play()
 	
@@ -37,11 +38,6 @@ func _process(delta):
 	if change_scene_flag:
 		get_tree().change_scene_to_file("res://Scenes/Bathroom2.tscn")
 		return
-		
-	if show_boss:
-		$Jefe.show()
-	else:
-		$Jefe.hide()
 		
 	if show_boss:
 		$Jefe.show()
@@ -67,12 +63,19 @@ func _process(delta):
 		$Alice.show()
 	else:
 		$Alice.hide()
+		
+	if show_mike:
+		$Mike.show()
+		$Oficina1.hide()
+	else:
+		$Mike.hide()
+		$Oficina1.show()
 
 func story_flow_1():
 	sub_controller.new_subtitle("", "Sales del baño, aún con algo de agua en las manos. ")
 	sub_controller.new_subtitle_callback("Tú", "Mierda. Bueno, creo que si me las seco con el pantalón no se notará...", _jefe_hide_show.bind(true))
 
-	sub_controller.new_subtitle("Jefe", "¡OYE TU!¡CHICO NUEVO! ¡¿POR QUÉ TARDABAS TANTO?!")
+	sub_controller.new_subtitle("Jefe", "¡OYE, TÚ! ¡CHICO NUEVO! ¡¿POR QUÉ TARDABAS TANTO?!")
 	sub_controller.new_subtitle("Jefe", "DA IGUAL, TOMA ESTOS REPORTES Y LLEVASELOS A ALICE, LA EMPLEADA DE PASO.")
 	sub_controller.new_subtitle_callback("Jefe", "¡TIENEN QUE ESTAR REGISTRADOS Y ARCHIVADOS PARA AYER!", _question_0_flow_reports)
 	
@@ -102,9 +105,9 @@ func _on_hands_pressed():
 		sub_controller.new_subtitle("", "Levantas tus manos de manera que tu jefe las pueda ver entre los reportes.")
 		sub_controller.new_subtitle("Tú", "Jefe... eh...Yo...")
 		sub_controller.new_subtitle("Tú", "CON UN DEMONIO ¿POR QUÉ TIENES QUE SER TAN INUTIL?")
-		sub_controller.new_subtitle_callback("", "Rápidamente se acerca un sujeto amigable hacia ti y tu jefe.", _freddy_hide_show(true))
+		sub_controller.new_subtitle("", "Rápidamente se acerca un sujeto amigable hacia ti y tu jefe.")
 
-		sub_controller.new_subtitle("Freddy", "Oiga jefe, tranquilo, yo me encargo, los llevaré por usted.")
+		sub_controller.new_subtitle_callback("Freddy", "Oiga jefe, tranquilo, yo me encargo, los llevaré por usted.", _freddy_hide_show.bind(true))
 		sub_controller.new_subtitle("Jefe", "PERFECTO, ALMENOS ALGUIEN AQUÍ SABE COMO TIENEN QUE SER LAS COSAS.")
 		sub_controller.new_subtitle_callback("Jefe", "NO COMO OTROS.", _jefe_hide_show.bind(false))
 
@@ -176,7 +179,7 @@ func _on_choose_question_1_flow_2():
 	_flow_last()
 
 func _question_2_flow_reports():
-	sub_controller.new_question("Cubículo", "", "usb", _on_choose_question_2)
+	sub_controller.new_question("Negarse e ir\na trabajar", "", "Coger USB", _on_choose_question_2)
 
 func _on_choose_question_2(option: int):
 	if option == 1:
@@ -200,6 +203,13 @@ func _freddy_hide_show(show: bool):
 func _rafael_hide_show(show: bool):
 	show_rafael = show
 
+func _rafael_hector_hide_show(show: bool):
+	show_rafael = show
+	show_hector = show
+
+func _mike_hide_show(show: bool):
+	show_mike = show
+
 func _on_choose_question_2_flow_1():
 	sub_controller.new_subtitle("Tú", "Lo siento, de verdad tengo mucho trabajo...")
 	sub_controller.new_subtitle("Freddy", "Entiendo, no te preocupes, me encargaré yo. ¡Siempre encuentro el tiempo!")
@@ -214,7 +224,7 @@ func _on_choose_question_2_flow_2():
 	sub_controller.new_subtitle("Freddy", "...")
 	sub_controller.new_subtitle_callback("Freddy", "Gracias.", _freddy_hide_show.bind(false))
 	sub_controller.new_subtitle("", "El sujeto desaparece entre los pasillos y la gente yendo de lado a lado.")
-	sub_controller.new_subtitle("", "Te diriges al cubículo de al lado donde te encuentras al sujeto en cuestión.")
+	sub_controller.new_subtitle_callback("", "Te diriges al cubículo de al lado donde te encuentras al sujeto en cuestión.", _mike_hide_show.bind(true))
 	sub_controller.new_subtitle("", "...")
 	sub_controller.new_subtitle("", "No te está prestando atención.")
 	sub_controller.new_subtitle("Tú", "¿Hola?")
@@ -232,6 +242,7 @@ func _on_choose_question_2_flow_2():
 	sub_controller.new_subtitle("Mike", "¿Ya podrías irte? Necesito seguir farmeando para comprar una armadura.")
 	sub_controller.new_subtitle("Tú", "Oh... Bueno, no te molesto más. Me iré a trabajar.")
 	sub_controller.new_subtitle("Mike", "Como quieras.")
+	sub_controller.new_subtitle_callback("", "Vuelves a tu cubículo", _mike_hide_show.bind(false))
 	
 	_flow_penultimate()
 	
@@ -255,11 +266,11 @@ func _on_choose_question_3_flow_1():
 func _on_choose_question_3_flow_2():
 	sub_controller.new_subtitle("Tú", "¡Voy a terminarlos ahora! ¡No me demoro!")
 	sub_controller.new_subtitle("Jefe", "¡OLVIDALO, ERES UNA TORTUGA, HARÉ QUE FREDERICK LOS LLEVE!")
-	sub_controller.new_subtitle("", "El jefe se retira en otra dirección, hacia un cubículo no muy lejos del tuyo.")
+	sub_controller.new_subtitle_callback("", "El jefe se retira en otra dirección, hacia un cubículo no muy lejos del tuyo.", _jefe_hide_show.bind(false))
 	sub_controller.new_subtitle("Tú", "Bueno, por lo menos ahora si puedo trabajar...")
 	sub_controller.new_subtitle("", "Te sientas en tu cubículo, pero pasados unos pocos minutos llegan dos sujetos a tu puesto.")
 	
-	sub_controller.new_subtitle("Rafael", "Buenas tardes, amigo, disculpa las molestias.")
+	sub_controller.new_subtitle_callback("Rafael", "Buenas tardes, amigo, disculpa las molestias.", _rafael_hector_hide_show.bind(true))
 	sub_controller.new_subtitle("Héctor", "Espero no estés haciendo nada importante, te queríamos pedir un favor.")
 	sub_controller.new_subtitle("Tú", "Yo...")
 	sub_controller.new_subtitle("Héctor", "Perfecto, el favor es el siguiente:")
@@ -287,7 +298,7 @@ func _on_choose_question_4_flow_1():
 	sub_controller.new_subtitle("Tú", "En... ¿En serio?")
 	sub_controller.new_subtitle("Rafael", "¿En serio?")
 	sub_controller.new_subtitle("Rafael", "¿En serio?")
-	sub_controller.new_subtitle("Héctor", "Bueno, tenemos que irnos, pero ¡suerte!")
+	sub_controller.new_subtitle_callback("Héctor", "Bueno, tenemos que irnos, pero ¡suerte!", _rafael_hector_hide_show.bind(false))
 	sub_controller.new_subtitle("Tú", "Mierda ¿Que se supone que haré con esto?")
 	sub_controller.new_subtitle("","...")
 	sub_controller.new_subtitle("", "Tardas al menos 8 horas trabajando en la presentación. Ahora te sientes agotado.")
@@ -301,7 +312,7 @@ func _on_choose_question_4_flow_2():
 	sub_controller.new_subtitle("Rafael", "Espera ¿qué? ¡pero si falta la mayor parte de tu trabajo!")
 	sub_controller.new_subtitle("Héctor", "¡Pero es la parte que tiene que ver contigo! ademas la tenía que hacer este sujeto y...")
 	sub_controller.new_subtitle("Rafael", "No no, eso no, tu tienes que hacer eso porque...")
-	sub_controller.new_subtitle("", "Ambos se retiran discutiendo hasta que se pierden de vista entre los muy atareados empleados.")
+	sub_controller.new_subtitle_callback("", "Ambos se retiran discutiendo hasta que se pierden de vista entre los muy atareados empleados.", _rafael_hector_hide_show.bind(false))
 	sub_controller.new_subtitle("Tú", "Bueno, no era mi problema. Seguro encontraran la manera de lograrlo.")
 	_flow_penultimate()
 	
@@ -309,7 +320,7 @@ func _on_choose_question_4_flow_2():
 
 func _flow_penultimate():
 	sub_controller.new_subtitle("Tú", "Supongo que debería ponerme a trabajar ahora.")
-	sub_controller.new_subtitle("Tú", "Tardas al menos 8 horas Terminando tu trabajo atrasado.")
+	sub_controller.new_subtitle("Tú", "Tardas al menos 8 horas terminando tu trabajo atrasado.")
 	_flow_last()
 	
 
